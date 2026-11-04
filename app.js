@@ -5,16 +5,33 @@ const formMessage = document.querySelector("#form-message");
 const placesLeft = document.querySelector("#places-left");
 const successState = document.querySelector("#success-state");
 const successCopy = document.querySelector("#success-copy");
+const choiceHint = document.querySelector("#choice-hint");
 
-let options = [];
+const STATIC_OPTIONS = [
+  { id: "option_a", label: "Option A", capacity: 2 },
+  { id: "option_b", label: "Option B", capacity: 2 },
+  { id: "option_c", label: "Option C", capacity: 2 },
+  { id: "option_d", label: "Option D", capacity: 2 },
+  { id: "option_e", label: "Option E", capacity: 2 },
+];
+
+let options = createStaticOptions();
 let selectedOptionId = "";
 let submitting = false;
 let completed = false;
+let availabilityReady = false;
+
+function createStaticOptions() {
+  return STATIC_OPTIONS.map((option) => ({ ...option, taken: 0, remaining: option.capacity }));
+}
 
 function renderOptions() {
   const hasAvailableOptions = options.some((option) => option.remaining > 0);
   const totalRemaining = options.reduce((total, option) => total + option.remaining, 0);
-  placesLeft.textContent = totalRemaining;
+  placesLeft.textContent = availabilityReady ? totalRemaining : "—";
+  choiceHint.textContent = availabilityReady
+    ? "Select one to continue"
+    : "Preview only; booking unavailable";
 
   if (!options.some((option) => option.id === selectedOptionId && option.remaining > 0)) {
     if (selectedOptionId) {
@@ -43,7 +60,7 @@ function renderOptions() {
     }
   }
 
-  submitButton.disabled = completed || submitting || !selectedOptionId;
+  submitButton.disabled = completed || submitting || !selectedOptionId || !availabilityReady;
 }
 
 function escapeHtml(value) {
@@ -58,12 +75,12 @@ async function refreshOptions() {
     if (!response.ok) throw new Error("Availability could not be loaded.");
     const data = await response.json();
     options = data.options;
-    renderOptions();
+    availabilityReady = true;
   } catch {
-    if (options.length === 0) {
-      optionList.innerHTML = '<div class="empty-state">Could not load options. Check your connection and refresh the page.</div>';
-    }
+    options = createStaticOptions();
+    availabilityReady = false;
   }
+  renderOptions();
 }
 
 optionList.addEventListener("click", (event) => {
@@ -113,5 +130,6 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
+renderOptions();
 refreshOptions();
 window.setInterval(refreshOptions, 4000);
