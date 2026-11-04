@@ -29,3 +29,18 @@ python -m unittest -v
 ```
 
 The server listens on `0.0.0.0` by default so hosting platforms can reach it, and uses the platform's `PORT` environment variable when provided. To keep it local-only, set `HOST` to `127.0.0.1`. Deploy behind HTTPS and set `COOKIE_SECURE=1` when using HTTPS.
+
+## Deploy to Netlify
+
+Netlify serves the frontend from `dist` and routes `/api/*` to a Netlify Function. The Netlify backend uses Neon PostgreSQL so reservations persist and capacity limits remain safe when people submit at the same time. It does not use the local Python server or `signups.sqlite3`.
+
+1. Create a PostgreSQL database on Neon and copy its connection string.
+2. In Netlify, add these environment variables for the site:
+	- `DATABASE_URL`: the Neon connection string.
+	- `ADMIN_USERNAME`: the roster administrator's username.
+	- `ADMIN_PASSWORD`: a long, private password.
+	- `ADMIN_SESSION_SECRET`: a separate long, random secret for admin sessions.
+	- `COOKIE_SECURE`: `1` for the deployed HTTPS site.
+3. Connect the Git repository to Netlify and deploy. Netlify reads `netlify.toml`, runs `npm run build`, and the function creates its tables and five default options on the first API request.
+
+Do not set the database or admin secrets in frontend files or commit them to Git. The local Python server remains available for development; Netlify uses the function backend instead.
