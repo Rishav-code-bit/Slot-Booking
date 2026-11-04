@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f5f0" />
+    <title>Pick your place</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/" aria-label="Pick your place home">
+        <span class="wordmark-mark" aria-hidden="true">P</span>
+        <span>COMMON<span class="wordmark-dot">/</span>PLACE</span>
+      </a>
+      <nav class="topbar-actions" aria-label="Main navigation">
+        <a class="nav-link" href="/responses.html">SEE SELECTIONS <span aria-hidden="true">↗</span></a>
+        <div class="live-indicator"><span class="live-dot"></span><span>LIVE AVAILABILITY</span></div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow"><span class="eyebrow-line"></span> YOUR TURN TO CHOOSE</p>
+        <h1 id="page-title">Pick your<br /><span>place.</span></h1>
+        <p class="intro-copy">Choose the option that works for you. Each one has a limited number of places, so once it's full, it closes.</p>
+        <div class="availability-summary" aria-live="polite">
+          <span class="summary-number" id="places-left">—</span>
+          <span class="summary-label">PLACES LEFT<br />IN TOTAL</span>
+          <span class="summary-divider"></span>
+          <span class="summary-pulse"></span>
+          <span class="summary-updated">UPDATES<br />AUTOMATICALLY</span>
+        </div>
+        <div class="side-note" aria-hidden="true">
+          <span class="side-note-mark">01</span>
+          <span>ONE PERSON<br />ONE PLACE</span>
+        </div>
+      </section>
+
+      <section class="form-panel" aria-labelledby="form-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow panel-eyebrow">SIGNUP FORM <span class="panel-rule"></span></p>
+            <h2 id="form-title">Make your selection</h2>
+          </div>
+          <span class="required-note"><span>*</span> REQUIRED</span>
+        </div>
+
+        <form id="signup-form">
+          <div class="field-row">
+            <label class="text-field">
+              <span class="field-label">YOUR NAME <span>*</span></span>
+              <input name="name" autocomplete="name" placeholder="e.g. Alex Morgan" maxlength="100" required />
+            </label>
+            <label class="text-field">
+              <span class="field-label">EMAIL ADDRESS <span>*</span></span>
+              <input name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required />
+            </label>
+          </div>
+
+          <div class="choice-heading">
+            <span class="field-label">CHOOSE ONE OPTION <span>*</span></span>
+            <span class="choice-hint" id="choice-hint">Select one to continue</span>
+          </div>
+          <div class="option-list" id="option-list" role="radiogroup" aria-label="Available options" aria-describedby="choice-hint">
+            <div class="loading-state">Checking what's available<span class="loading-dots">...</span></div>
+          </div>
+
+          <div class="form-footer">
+            <p class="privacy-note"><span class="lock-mark" aria-hidden="true">●</span> One response per email address.</p>
+            <button class="submit-button" type="submit" id="submit-button" disabled>
+              <span>Reserve my place</span><span class="button-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="success-state" id="success-state" hidden>
+          <span class="success-icon" aria-hidden="true">✓</span>
+          <div>
+            <h3>You're on the list.</h3>
+            <p id="success-copy">Your place has been reserved.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <span>CAPACITY IS LIMITED</span>
+      <span class="footer-mark" aria-hidden="true">C/P</span>
+      <span>YOUR SELECTION IS SAVED SECURELY</span>
+    </footer>
+  </body>
+</html>

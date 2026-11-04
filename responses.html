@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f5f0" />
+    <title>Selections | Pick your place</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/responses.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/" aria-label="Pick your place home">
+        <span class="wordmark-mark" aria-hidden="true">P</span>
+        <span>COMMON<span class="wordmark-dot">/</span>PLACE</span>
+      </a>
+      <nav class="topbar-actions" aria-label="Main navigation">
+        <a class="nav-link" href="/">BACK TO SIGNUP <span aria-hidden="true">↗</span></a>
+        <div class="live-indicator"><span class="live-dot"></span><span>LIVE SELECTIONS</span></div>
+        <button class="logout-button" type="button" id="logout-button">SIGN OUT</button>
+      </nav>
+    </header>
+
+    <main class="responses-main">
+      <section class="responses-intro" aria-labelledby="page-title">
+        <p class="eyebrow"><span class="eyebrow-line"></span> THE CURRENT LIST</p>
+        <h1 id="page-title">Who's picked<br /><span>what.</span></h1>
+        <p class="intro-copy">See how each option is filling up. Names are visible to everyone; email addresses stay private.</p>
+        <div class="availability-summary" aria-live="polite">
+          <span class="summary-number" id="responses-count">—</span>
+          <span class="summary-label">PEOPLE<br />SIGNED UP</span>
+          <span class="summary-divider"></span>
+          <span class="summary-pulse"></span>
+          <span class="summary-updated">REFRESHES<br />EVERY 10 SEC</span>
+        </div>
+      </section>
+
+      <section class="responses-panel" aria-labelledby="selections-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow panel-eyebrow">LIVE ROSTER <span class="panel-rule"></span></p>
+            <h2 id="selections-title">Current selections</h2>
+          </div>
+          <button class="refresh-button" type="button" id="refresh-button" aria-label="Refresh selections" title="Refresh selections">↻</button>
+        </div>
+        <div class="response-groups" id="response-groups" aria-live="polite">
+          <div class="loading-state">Loading the current list<span class="loading-dots">...</span></div>
+        </div>
+        <p class="last-updated" id="last-updated"></p>
+        <p class="admin-message" id="admin-message" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <span>CAPACITY IS LIMITED</span>
+      <span class="footer-mark" aria-hidden="true">C/P</span>
+      <span>EMAIL ADDRESSES ARE PRIVATE</span>
+    </footer>
+  </body>
+</html>
