@@ -12,30 +12,35 @@ let submitting = false;
 let completed = false;
 
 function renderOptions() {
-  const available = options.filter((option) => option.remaining > 0);
+  const hasAvailableOptions = options.some((option) => option.remaining > 0);
   const totalRemaining = options.reduce((total, option) => total + option.remaining, 0);
   placesLeft.textContent = totalRemaining;
 
-  if (!available.some((option) => option.id === selectedOptionId)) {
+  if (!options.some((option) => option.id === selectedOptionId && option.remaining > 0)) {
     if (selectedOptionId) {
       formMessage.textContent = "That option just filled up. Please choose another.";
     }
     selectedOptionId = "";
   }
 
-  if (available.length === 0) {
+  if (options.length === 0) {
     optionList.innerHTML = '<div class="empty-state">All places are filled. There are no options left to choose.</div>';
   } else {
-    optionList.innerHTML = available.map((option) => {
+    optionList.innerHTML = options.map((option) => {
       const selected = option.id === selectedOptionId;
+      const full = option.remaining <= 0;
       const ticks = Array.from({ length: option.capacity }, (_, index) =>
         `<span class="capacity-tick${index < option.taken ? " filled" : ""}"></span>`
       ).join("");
-      return `<button class="option-card${selected ? " selected" : ""}" type="button" role="radio" aria-checked="${selected}" data-option-id="${option.id}">
+      const remainingLabel = full ? "FULL" : `${option.remaining} ${option.remaining === 1 ? "place" : "places"} left`;
+      return `<button class="option-card${selected ? " selected" : ""}${full ? " full" : ""}" type="button" role="radio" aria-checked="${selected}" aria-disabled="${full}" data-option-id="${option.id}"${full ? " disabled" : ""}>
         <span class="option-main"><span class="radio-mark" aria-hidden="true"></span><span class="option-name">${escapeHtml(option.label)}</span></span>
-        <span class="option-count"><span>${option.remaining} ${option.remaining === 1 ? "place" : "places"} left</span><span class="capacity-ticks" aria-hidden="true">${ticks}</span></span>
+        <span class="option-count"><span>${remainingLabel}</span><span class="capacity-ticks" aria-hidden="true">${ticks}</span></span>
       </button>`;
     }).join("");
+    if (!hasAvailableOptions) {
+      optionList.insertAdjacentHTML("beforeend", '<div class="empty-state">All places are filled. There are no options left to choose.</div>');
+    }
   }
 
   submitButton.disabled = completed || submitting || !selectedOptionId;
@@ -63,7 +68,7 @@ async function refreshOptions() {
 
 optionList.addEventListener("click", (event) => {
   const card = event.target.closest("[data-option-id]");
-  if (!card || completed) return;
+  if (!card || card.disabled || completed) return;
   selectedOptionId = card.dataset.optionId;
   formMessage.textContent = "";
   renderOptions();

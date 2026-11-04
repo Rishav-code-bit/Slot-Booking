@@ -240,6 +240,11 @@ h2 {
 
 .option-card:hover { border-color: #9aad8c; transform: translateY(-1px); }
 .option-card.selected { background: #f0f5e9; border-color: var(--green); }
+.option-card:disabled { color: #777b74; background: #ecece8; border-color: #dedfd9; cursor: not-allowed; transform: none; }
+.option-card:disabled:hover { border-color: #dedfd9; transform: none; }
+.option-card:disabled .radio-mark { border-color: #bfc2ba; }
+.option-card:disabled .option-name, .option-card:disabled .option-count { color: #858880; }
+.option-card:disabled .capacity-tick, .option-card:disabled .capacity-tick.filled { background: #c4c6bf; }
 .option-main { display: flex; align-items: center; gap: 12px; }
 
 .radio-mark {
@@ -359,7 +364,7 @@ h2 {
   main, .responses-main { width: 88%; padding: 42px 0 44px; gap: 30px; }
   h1 { margin: 16px 0 12px; font-size: 53px; }
   .intro-copy { max-width: 250px; font-size: 13px; line-height: 1.6; }
-  .availability-summary { right: 0; bottom: 0; gap: 8px; }
+  .availability-summary { position: static; gap: 8px; margin-top: 20px; }
   .summary-number { font-size: 32px; }
   .summary-label, .summary-updated { font-size: 7px; }
   .summary-divider { height: 24px; margin-left: 2px; }
@@ -379,6 +384,16 @@ h2 {
   .cancel-button { grid-column: 1; }
   .submit-button { width: 100%; }
   .page-footer { min-height: 57px; padding: 0 6%; font-size: 7px; }
+}
+
+@media (max-width: 380px) {
+  .topbar { height: auto; min-height: 64px; gap: 8px; padding: 9px 5%; }
+  .wordmark { gap: 7px; font-size: 10px; }
+  .wordmark-mark { width: 27px; height: 27px; }
+  .topbar-actions { flex-wrap: wrap; gap: 7px; }
+  .topbar-actions .live-indicator { display: none; }
+  .logout-button { padding: 6px 7px; font-size: 8px; }
+  .page-footer { gap: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

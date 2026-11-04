@@ -15,6 +15,7 @@ from urllib.parse import urlparse
 
 BASE_DIR = Path(__file__).resolve().parent
 DATABASE_PATH = Path(os.environ.get("SIGNUP_DB_PATH", BASE_DIR / "signups.sqlite3"))
+HOST = os.environ.get("HOST", "0.0.0.0")
 PORT = int(os.environ.get("PORT", "8000"))
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD") or secrets.token_urlsafe(18)
@@ -335,7 +336,7 @@ class SignupHandler(SimpleHTTPRequestHandler):
 if __name__ == "__main__":
     with closing(open_database()) as database:
         initialize_database(database)
-    server = ThreadingHTTPServer(("127.0.0.1", PORT), SignupHandler)
+    server = ThreadingHTTPServer((HOST, PORT), SignupHandler)
     print(f"Signup form available at http://127.0.0.1:{PORT}")
     if not os.environ.get("ADMIN_PASSWORD"):
         print(f"Admin login: {ADMIN_USERNAME} / {ADMIN_PASSWORD}")

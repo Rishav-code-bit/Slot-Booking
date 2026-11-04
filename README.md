@@ -28,4 +28,4 @@ The app stores signups in `signups.sqlite3` in this folder. That database is int
 python -m unittest -v
 ```
 
-The server binds to `127.0.0.1`; hosting it for access by others requires configuring the host and deploying it behind HTTPS. Set `COOKIE_SECURE=1` when using HTTPS.
+The server listens on `0.0.0.0` by default so hosting platforms can reach it, and uses the platform's `PORT` environment variable when provided. To keep it local-only, set `HOST` to `127.0.0.1`. Deploy behind HTTPS and set `COOKIE_SECURE=1` when using HTTPS.
