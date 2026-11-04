@@ -75,11 +75,7 @@ button, input { font: inherit; }
 }
 
 .topbar-actions { display: flex; align-items: center; gap: 25px; }
-.nav-link, .text-link { color: var(--green); font: 500 9px "DM Mono", monospace; text-decoration: none; }
-.nav-link span, .text-link span { color: var(--coral); }
-.nav-link:hover, .text-link:hover { color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
-.logout-button { padding: 7px 9px; color: #6f766b; background: transparent; border: 1px solid #dfe1d7; cursor: pointer; font: 9px "DM Mono", monospace; }
-.logout-button:hover { color: var(--green-deep); background: #f0f5e9; }
+.topbar-actions { display: flex; align-items: center; gap: 25px; }
 
 .live-dot, .summary-pulse {
   width: 7px;
@@ -224,6 +220,12 @@ h2 {
 .choice-heading { display: flex; align-items: center; justify-content: space-between; margin: 29px 0 11px; }
 .choice-hint { color: #96988e; font-size: 9px; }
 .option-list { display: grid; gap: 8px; }
+.option-entry { display: grid; }
+.option-people { display: grid; gap: 5px; padding: 7px 14px 2px; color: #777b70; font-size: 11px; line-height: 1.45; }
+.option-people-label { color: var(--green); font: 8px "DM Mono", monospace; }
+.option-people-list { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.option-people-list li { min-width: 0; }
+.option-people-name { min-width: 0; overflow-wrap: anywhere; }
 
 .option-card {
   position: relative;
@@ -299,39 +301,7 @@ h2 {
 .success-state p { margin: 0; color: #72766d; font-size: 13px; }
 .text-link { display: inline-block; margin-top: 3px; }
 
-.responses-main { width: min(1120px, 85.8%); grid-template-columns: minmax(270px, 0.78fr) minmax(480px, 1.22fr); }
-.responses-intro { align-self: start; padding-top: 20px; }
-.responses-panel { padding: 32px 36px 29px; background: var(--white); border: 1px solid #e8e7df; box-shadow: 0 16px 50px #333b2d0b; animation: rise-in 480ms ease-out both; }
-.refresh-button { width: 35px; height: 35px; color: var(--green); background: transparent; border: 1px solid #dfe1d7; cursor: pointer; font-size: 20px; }
-.refresh-button:hover { background: #f0f5e9; }
-.response-groups { display: grid; gap: 0; margin-top: 23px; }
-.response-group { padding: 14px 0; border-top: 1px solid #e8e8e0; }
-.response-group-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.response-group-heading h3 { margin: 0; font: 600 15px "Manrope", sans-serif; }
-.response-group-heading > span { flex: 0 0 auto; color: #73786e; font: 9px "DM Mono", monospace; }
-.response-capacity { display: flex; gap: 4px; margin-top: 9px; }
-.response-capacity-tick { width: 19px; height: 4px; background: #e0e2d9; }
-.response-capacity-tick.filled { background: var(--coral); }
-.people-list { display: grid; gap: 6px; margin: 11px 0 0; padding: 0; list-style: none; }
-.people-list li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 9px; color: var(--green-deep); background: #eef3e8; font-size: 11px; }
-.remove-button { flex: 0 0 auto; padding: 5px 7px; color: #a55343; background: transparent; border: 1px solid #e8c8be; cursor: pointer; font: 9px "DM Mono", monospace; }
-.remove-button:hover:not(:disabled) { color: #fff; background: #a55343; border-color: #a55343; }
-.remove-button:disabled { opacity: 0.55; cursor: wait; }
-.no-people { margin: 9px 0 0; color: #898d82; font-size: 11px; }
-.last-updated { margin: 8px 0 0; color: #92958b; font: 9px "DM Mono", monospace; text-align: right; }
-.admin-message { min-height: 16px; margin: 14px 0 0; color: #ad4d3e; font-size: 11px; }
-.admin-message:empty { display: none; }
-.admin-message.success { color: var(--green); }
-
-.admin-main { width: min(950px, 85.8%); grid-template-columns: 1fr minmax(320px, 0.9fr); }
-.admin-intro { align-self: center; }
-.admin-intro h1 span { font-size: 0.72em; }
-.admin-panel { padding: 35px; background: var(--white); border: 1px solid #e8e7df; box-shadow: 0 16px 50px #333b2d0b; animation: rise-in 480ms ease-out both; }
-.admin-panel h2 { margin: 10px 0 25px; }
-.login-form { display: grid; gap: 17px; }
-.login-form .submit-button { margin-top: 4px; }
-.login-message { min-height: 16px; margin: 0; color: #ad4d3e; font-size: 11px; }
-.login-message:empty { display: none; }
+.text-link { display: inline-block; margin-top: 3px; }
 
 .page-footer {
   min-height: 65px;
@@ -347,9 +317,8 @@ h2 {
 .footer-mark { color: var(--green); font: 800 11px "Manrope", sans-serif; }
 
 @media (max-width: 850px) {
-  main, .responses-main, .admin-main { width: min(650px, 86%); min-height: auto; padding: 56px 0 65px; grid-template-columns: 1fr; gap: 42px; }
+  main { width: min(650px, 86%); min-height: auto; padding: 56px 0 65px; grid-template-columns: 1fr; gap: 42px; }
   .intro { padding-bottom: 0; }
-  .responses-intro { padding-top: 0; }
   h1 { margin-top: 18px; font-size: 62px; }
   .intro-copy { max-width: 450px; }
   .availability-summary { position: absolute; right: 0; bottom: 3px; margin: 0; }
@@ -361,7 +330,7 @@ h2 {
   .live-indicator { font-size: 8px; }
   .topbar-actions { gap: 10px; }
   .nav-link { font-size: 8px; }
-  main, .responses-main { width: 88%; padding: 42px 0 44px; gap: 30px; }
+  main { width: 88%; padding: 42px 0 44px; gap: 30px; }
   h1 { margin: 16px 0 12px; font-size: 53px; }
   .intro-copy { max-width: 250px; font-size: 13px; line-height: 1.6; }
   .availability-summary { position: static; gap: 8px; margin-top: 20px; }
@@ -370,18 +339,15 @@ h2 {
   .summary-divider { height: 24px; margin-left: 2px; }
   .summary-pulse { width: 5px; height: 5px; }
   .form-panel { padding: 25px 20px 21px; }
-  .responses-panel { padding: 25px 20px 21px; }
-  .admin-panel { padding: 27px 22px; }
   h2 { font-size: 19px; }
   .field-row { grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
   .choice-heading { margin-top: 24px; }
   .choice-hint { font-size: 8px; }
   .option-card { min-height: 53px; padding: 0 11px; }
+  .option-people { padding-left: 11px; padding-right: 11px; }
   .option-count { gap: 5px; font-size: 9px; }
   .capacity-tick { width: 10px; }
   .form-footer { align-items: flex-start; flex-direction: column; }
-  .cancel-form { grid-template-columns: 1fr; }
-  .cancel-button { grid-column: 1; }
   .submit-button { width: 100%; }
   .page-footer { min-height: 57px; padding: 0 6%; font-size: 7px; }
 }
