@@ -12,6 +12,7 @@ const STATIC_OPTIONS = [
   { id: "option_a", label: "Monday, Tuesday", capacity: 2 },
   { id: "option_b", label: "Tuesday, Wednesday", capacity: 2 },
   { id: "option_c", label: "Wednesday, Thursday", capacity: 2 },
+  { id: "option_d", label: "Thursday, Friday", capacity: 2 },
   { id: "option_e", label: "Friday, Saturday", capacity: 2 },
   { id: "option_f", label: "Saturday, Sunday", capacity: 2 },
 ];
